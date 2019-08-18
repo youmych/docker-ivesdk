@@ -14,11 +14,12 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
 
 RUN apt-get update && \
     apt-get upgrade -y && \
-    apt-get install -y gcc g++ binutils cmake git doxygen graphviz && \
-    rm -rf /var/cache/apt/* && \
-    adduser -D -s /usr/bin/bash sdk
+    apt-get install -y apt-utils && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y gcc-8 g++-8 binutils make cmake git doxygen graphviz && \
+    rm -rf /var/cache/apt/* 
+#    adduser sdk --home /home/sdk --shell /usr/bin/bash 
 
-CMD [ "/usr/bin/bash" ]
+CMD [ "/bin/bash" ]
 
-USER sdk
-WORKDIR /home/sdk
+#USER root
+#WORKDIR /root
