@@ -16,15 +16,16 @@ RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y apt-utils && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y gcc g++ binutils \
-        make cmake git doxygen graphviz \
+        make cmake doxygen graphviz \
         libavcodec-dev libavdevice-dev \
         libavfilter-dev libavresample-dev \
         libavutil-dev libswscale-dev \
         libswresample-dev libasound2-dev && \
-    rm -rf /var/cache/apt/* 
+    rm -rf /var/cache/apt/* && \
+    mkdir -p /opt/project
 #    adduser sdk --home /home/sdk --shell /usr/bin/bash 
 
 CMD [ "/bin/bash" ]
 
 #USER root
-#WORKDIR /root
+WORKDIR /opt/project
