@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM debian:latest
 
 ARG BUILD_DATE
 ARG VCS_REF
@@ -15,7 +15,12 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y apt-utils && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y gcc-8 g++-8 binutils make cmake git doxygen graphviz && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y gcc g++ binutils \
+        make cmake git doxygen graphviz \
+        libavcodec-dev libavdevice-dev \
+        libavfilter-dev libavresample-dev \
+        libavutil-dev libswscale-dev \
+        libswresample-dev libasound2-dev && \
     rm -rf /var/cache/apt/* 
 #    adduser sdk --home /home/sdk --shell /usr/bin/bash 
 
