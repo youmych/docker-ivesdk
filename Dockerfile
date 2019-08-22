@@ -15,13 +15,15 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y apt-utils && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y gcc g++ binutils \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y gcc-8 g++-8 binutils \
         make cmake doxygen graphviz \
         libavcodec-dev libavdevice-dev \
         libavfilter-dev libavresample-dev \
         libavutil-dev libswscale-dev \
         libswresample-dev libasound2-dev && \
     rm -rf /var/cache/apt/* && \
+    update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 50 && \
+    update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-8 50 && \
     mkdir -p /opt/project
 #    adduser sdk --home /home/sdk --shell /usr/bin/bash 
 
