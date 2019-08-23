@@ -16,7 +16,7 @@ RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y apt-utils && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y gcc-8 g++-8 binutils \
-        make cmake doxygen graphviz \
+        make cmake doxygen graphviz perl \
         libavcodec-dev libavdevice-dev \
         libavfilter-dev libavresample-dev \
         libavutil-dev libswscale-dev \
