@@ -22,13 +22,16 @@ RUN apt-get update && \
         libavutil-dev libswscale-dev \
         libswresample-dev libasound2-dev \
         libgdbm-compat4 libgdbm5 libperl5.26 netbase perl-modules-5.26 && \
+    apt-get -y clean && \
+    rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/* && \
     rm -rf /var/cache/apt/* && \
     update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 50 && \
     update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-8 50 && \
-    mkdir -p /opt/project
-#    adduser sdk --home /home/sdk --shell /usr/bin/bash 
+    mkdir -p /opt/project && \
+    groupadd -g1000 sdk && \
+    useradd -u 1000 -g 1000 -d /home/sdk -s /bin/bash sdk 
 
 CMD [ "/bin/bash" ]
 
-#USER root
+USER sdk
 WORKDIR /opt/project
