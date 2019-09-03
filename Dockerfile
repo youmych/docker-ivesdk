@@ -2,6 +2,8 @@ FROM ubuntu:18.04
 
 ARG BUILD_DATE
 ARG VCS_REF
+ARG user
+ARG uid
 
 LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.name="" \
@@ -28,10 +30,9 @@ RUN apt-get update && \
     update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 50 && \
     update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-8 50 && \
     mkdir -p /opt/project && \
-    groupadd -g1000 sdk && \
-    useradd -u 1000 -g 1000 -d /home/sdk -s /bin/bash sdk 
+    useradd -ms /bin/bash -u $uid $user
 
 CMD [ "/bin/bash" ]
 
-USER sdk
+USER $user
 WORKDIR /opt/project
